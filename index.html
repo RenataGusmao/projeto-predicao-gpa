@@ -39,16 +39,16 @@
         </div>
         <div class="metric-grid" aria-label="Metricas do modelo">
           <article class="metric-card">
-            <strong>100%</strong>
-            <span>estatico para Vercel</span>
+            <strong>R2 ~= 0.90</strong>
+            <span>modelo treinado</span>
           </article>
           <article class="metric-card">
-            <strong>0 API</strong>
-            <span>sem backend externo</span>
+            <strong>MAE ~= 0.12</strong>
+            <span>baixo erro medio</span>
           </article>
           <article class="metric-card">
             <strong>50.000</strong>
-            <span>registros de referencia</span>
+            <span>registros analisados</span>
           </article>
         </div>
       </div>
@@ -68,7 +68,7 @@
         <article class="step-card">
           <span>02</span>
           <h3>Modelo preditivo</h3>
-          <p>O sistema calcula uma estimativa estatica no proprio navegador, sem depender de servidor externo.</p>
+          <p>O sistema usa uma versao compacta do modelo treinado, exportada para executar diretamente no navegador.</p>
         </article>
         <article class="step-card">
           <span>03</span>
@@ -199,7 +199,7 @@
           <p class="interpretation" id="interpretation">Preencha o formulario para visualizar a estimativa.</p>
           <div class="confidence-strip">
             <span>Modelo</span>
-            <strong>Preditor estatico em JavaScript</strong>
+            <strong>Random Forest exportado</strong>
           </div>
           <p class="status-message" id="status-message"></p>
         </aside>
@@ -211,6 +211,7 @@
     <p>Projeto academico de Data Science para predicao de desempenho academico.</p>
   </footer>
 
+  <script src="model.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
