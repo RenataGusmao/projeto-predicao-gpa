@@ -65,14 +65,14 @@ Para permitir a publicação como site estático na Vercel, sem backend e sem AP
 
 ```txt
 .
-├── assets/
-│   └── hero-academic-ai.png
-├── index.html
-├── style.css
-├── script.js
-├── model.js
-├── model-metrics.json
-└── README.md
+|-- assets/
+|   `-- hero-academic-ai.png
+|-- index.html
+|-- style.css
+|-- script.js
+|-- model.js
+|-- model-metrics.json
+`-- README.md
 ```
 
 ## Como executar localmente

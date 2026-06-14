@@ -15,9 +15,9 @@
       <span class="brand-mark">E</span>
       <span>EduPredict AI</span>
     </a>
-    <nav class="nav-links" aria-label="Navegacao principal">
+    <nav class="nav-links" aria-label="Navegação principal">
       <a href="#funcionamento">Como funciona</a>
-      <a href="#predicao">Predicao</a>
+      <a href="#predicao">Predição</a>
       <a href="#resultado">Resultado</a>
     </nav>
   </header>
@@ -26,25 +26,25 @@
     <section class="hero">
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <p class="eyebrow">Analise preditiva para gestao academica</p>
+        <p class="eyebrow">Análise preditiva para gestão acadêmica</p>
         <h1>EduPredict AI</h1>
-        <p class="hero-subtitle">Sistema Inteligente de Predicao de Desempenho Academico</p>
+        <p class="hero-subtitle">Sistema Inteligente de Predição de Desempenho Acadêmico</p>
         <p class="hero-copy">
-          Estime o GPA final do semestre com um modelo preditivo baseado em dados academicos,
-          habitos de estudo, uso de IA generativa e fatores comportamentais.
+          Estime o GPA final do semestre com um modelo preditivo baseado em dados acadêmicos,
+          hábitos de estudo, uso de IA generativa e fatores comportamentais.
         </p>
         <div class="hero-actions">
           <a class="primary-button" href="#predicao">Simular estudante</a>
           <a class="secondary-button" href="#funcionamento">Ver fluxo</a>
         </div>
-        <div class="metric-grid" aria-label="Metricas do modelo">
+        <div class="metric-grid" aria-label="Métricas do modelo">
           <article class="metric-card">
             <strong>R2 ~= 0.90</strong>
             <span>modelo treinado</span>
           </article>
           <article class="metric-card">
             <strong>MAE ~= 0.12</strong>
-            <span>baixo erro medio</span>
+            <span>baixo erro médio</span>
           </article>
           <article class="metric-card">
             <strong>50.000</strong>
@@ -57,37 +57,37 @@
     <section id="funcionamento" class="section">
       <div class="section-heading">
         <p class="eyebrow">Como funciona</p>
-        <h2>Da entrada dos dados a decisao academica</h2>
+        <h2>Da entrada dos dados à decisão acadêmica</h2>
       </div>
       <div class="steps-grid">
         <article class="step-card">
           <span>01</span>
           <h3>Dados do estudante</h3>
-          <p>O usuario informa GPA anterior, horas de estudo, uso de IA e indicadores comportamentais.</p>
+          <p>O usuário informa GPA anterior, horas de estudo, uso de IA e indicadores comportamentais.</p>
         </article>
         <article class="step-card">
           <span>02</span>
           <h3>Modelo preditivo</h3>
-          <p>O sistema usa uma versao compacta do modelo treinado, exportada para executar diretamente no navegador.</p>
+          <p>O sistema usa uma versão compacta do modelo treinado, exportada para executar diretamente no navegador.</p>
         </article>
         <article class="step-card">
           <span>03</span>
           <h3>GPA previsto</h3>
-          <p>O sistema retorna a estimativa do GPA final e uma interpretacao simples para apoio a gestao.</p>
+          <p>O sistema retorna a estimativa do GPA final e uma interpretação simples para apoio à gestão.</p>
         </article>
       </div>
     </section>
 
     <section id="predicao" class="section form-section">
       <div class="section-heading">
-        <p class="eyebrow">Predicao</p>
+        <p class="eyebrow">Predição</p>
         <h2>Simule o desempenho final</h2>
       </div>
 
       <div class="workspace">
         <form id="prediction-form" class="prediction-form">
           <label>
-            Area principal
+            Área principal
             <select name="Major_Category" required>
               <option value="STEM">STEM</option>
               <option value="Business">Business</option>
@@ -157,12 +157,12 @@
           </label>
 
           <label>
-            Dependencia percebida da IA
+            Dependência percebida da IA
             <input name="Perceived_AI_Dependency" type="number" min="1" max="10" step="1" value="5" required />
           </label>
 
           <label>
-            Politica institucional
+            Política institucional
             <select name="Institutional_Policy" required>
               <option value="Allowed_With_Citation">Allowed_With_Citation</option>
               <option value="Actively_Encouraged">Actively_Encouraged</option>
@@ -176,7 +176,7 @@
           </label>
 
           <label>
-            Retencao de habilidades
+            Retenção de habilidades
             <input name="Skill_Retention_Score" type="number" min="0" max="100" step="0.1" value="78" required />
           </label>
 
@@ -189,14 +189,14 @@
             </select>
           </label>
 
-          <button class="submit-button" type="submit">Gerar predicao</button>
+          <button class="submit-button" type="submit">Gerar predição</button>
         </form>
 
         <aside id="resultado" class="result-panel">
           <p class="eyebrow">Resultado</p>
           <h2>GPA previsto</h2>
           <div class="gpa-value" id="gpa-value">--</div>
-          <p class="interpretation" id="interpretation">Preencha o formulario para visualizar a estimativa.</p>
+          <p class="interpretation" id="interpretation">Preencha o formulário para visualizar a estimativa.</p>
           <div class="confidence-strip">
             <span>Modelo</span>
             <strong>Random Forest exportado</strong>
@@ -208,7 +208,7 @@
   </main>
 
   <footer class="footer">
-    <p>Projeto academico de Data Science para predicao de desempenho academico.</p>
+    <p>Projeto acadêmico de Data Science para predição de desempenho acadêmico.</p>
   </footer>
 
   <script src="model.js"></script>

@@ -38,10 +38,10 @@ function getInterpretation(gpa) {
   }
 
   if (gpa >= 2.5) {
-    return "Desempenho intermediario previsto";
+    return "Desempenho intermediário previsto";
   }
 
-  return "Atencao: desempenho previsto abaixo do ideal";
+  return "Atenção: desempenho previsto abaixo do ideal";
 }
 
 function buildPayload(formData) {
@@ -103,7 +103,7 @@ function predictGpa(input) {
   const model = window.EDUPREDICT_MODEL;
 
   if (!model) {
-    throw new Error("Modelo treinado nao foi carregado.");
+    throw new Error("Modelo treinado não foi carregado.");
   }
 
   const values = encodeInput(input, model.columns);
@@ -121,11 +121,11 @@ form.addEventListener("submit", (event) => {
 
     gpaValue.textContent = predictedGpa.toFixed(2);
     interpretation.textContent = getInterpretation(predictedGpa);
-    statusMessage.textContent = "Predicao gerada com o modelo treinado exportado para o navegador.";
+    statusMessage.textContent = "Predição gerada com o modelo treinado exportado para o navegador.";
     statusMessage.classList.remove("error");
   } catch (error) {
     gpaValue.textContent = "--";
-    interpretation.textContent = "Nao foi possivel gerar a predicao.";
+    interpretation.textContent = "Não foi possível gerar a predição.";
     statusMessage.textContent = error.message;
     statusMessage.classList.add("error");
   }
