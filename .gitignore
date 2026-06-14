@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+backend/models/*.joblib
+backend/models/*.pkl
+backend/__pycache__/
+.DS_Store

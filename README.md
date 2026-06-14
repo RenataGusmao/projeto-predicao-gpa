@@ -1,12 +1,48 @@
 # EduPredict AI
 
-Aplicação web estática para demonstração de um projeto de Data Science voltado à predição de desempenho acadêmico de estudantes.
+Aplicação web para demonstração de um projeto de Data Science voltado à predição de desempenho acadêmico de estudantes.
+
+O projeto inclui frontend, backend, scripts de treinamento, dados utilizados e arquivos de configuração necessários para execução e reprodução da solução.
+
+## Visão geral
 
 O sistema estima o GPA final do semestre a partir de variáveis acadêmicas, comportamentais e relacionadas ao uso de IA generativa.
 
-## Objetivo
+A versão publicada na Vercel executa o modelo diretamente no navegador usando o arquivo `model.js`, que contém uma versão compacta do Random Forest exportada para JavaScript. O backend também está incluído no repositório para documentação, treinamento e execução local da API.
 
-O objetivo do projeto é apresentar uma aplicação prática de Machine Learning para apoiar a análise de desempenho acadêmico, permitindo que o usuário simule diferentes perfis de estudantes e visualize uma predição de GPA.
+## Estrutura do repositório
+
+```txt
+.
+|-- assets/
+|   `-- hero-academic-ai.png
+|-- backend/
+|   |-- data/
+|   |   `-- ai_student_impact_dataset.csv
+|   |-- models/
+|   |   `-- .gitkeep
+|   |-- main.py
+|   |-- train_model.py
+|   |-- export_static_model.py
+|   |-- requirements.txt
+|   |-- runtime.txt
+|   `-- README.md
+|-- index.html
+|-- style.css
+|-- script.js
+|-- model.js
+|-- model-metrics.json
+|-- .gitignore
+`-- README.md
+```
+
+## O que o repositório contempla
+
+* Frontend: arquivos `index.html`, `style.css`, `script.js`, `model.js` e pasta `assets/`.
+* Backend: API FastAPI em `backend/main.py`.
+* Scripts de treinamento: `backend/train_model.py` e `backend/export_static_model.py`.
+* Dados utilizados: `backend/data/ai_student_impact_dataset.csv`.
+* Configurações: `backend/requirements.txt`, `backend/runtime.txt`, `.gitignore` e `model-metrics.json`.
 
 ## Base de dados
 
@@ -33,7 +69,7 @@ A variável-alvo do modelo é `Post_Semester_GPA`, que representa o GPA final do
 
 Foi treinado um modelo de regressão com Random Forest para prever o GPA final do semestre.
 
-Para permitir a publicação como site estático na Vercel, sem backend e sem API, foi treinada uma versão compacta do Random Forest e exportada para JavaScript no arquivo `model.js`. Assim, a predição acontece diretamente no navegador, mas ainda utilizando um modelo treinado a partir da base de dados.
+Para permitir a publicação como site estático na Vercel, sem depender de backend em produção, foi treinada uma versão compacta do Random Forest e exportada para JavaScript no arquivo `model.js`.
 
 ### Métricas da versão exportada
 
@@ -46,61 +82,52 @@ Para permitir a publicação como site estático na Vercel, sem backend e sem AP
 * RMSE: 0.1573
 * R²: 0.8974
 
-## Como a predição funciona no site
+## Como executar o frontend
 
-1. O usuário preenche o formulário com os dados do estudante.
-2. O JavaScript transforma as entradas categóricas no mesmo formato utilizado durante o treinamento.
-3. O arquivo `model.js` executa as árvores do Random Forest exportado.
-4. O sistema exibe o GPA previsto, uma interpretação simples do resultado e legendas explicativas.
+Como o frontend é estático, basta abrir o arquivo `index.html` no navegador.
 
-## Explicação dos resultados
+Também é possível usar a extensão Live Server no VS Code.
 
-Além do valor previsto, a interface apresenta uma leitura textual do resultado com:
+## Como treinar o modelo completo
 
-* comparação entre o GPA anterior e o GPA previsto;
-* fatores favoráveis ao desempenho;
-* pontos de atenção associados ao perfil informado.
-
-Essas legendas são geradas no próprio frontend a partir dos dados inseridos pelo usuário e ajudam a tornar o resultado mais compreensível para fins acadêmicos e de apresentação.
-
-## Tecnologias utilizadas
-
-* HTML5
-* CSS3
-* JavaScript
-* Random Forest Regressor
-* Vercel
-
-## Estrutura do projeto
-
-```txt
-.
-|-- assets/
-|   `-- hero-academic-ai.png
-|-- index.html
-|-- style.css
-|-- script.js
-|-- model.js
-|-- model-metrics.json
-`-- README.md
+```bash
+cd backend
+pip install -r requirements.txt
+python train_model.py
 ```
 
-## Como executar localmente
+Esse processo gera os arquivos `.joblib` dentro de `backend/models/`. Eles não são enviados ao GitHub porque são grandes.
 
-Como o projeto é estático, basta abrir o arquivo `index.html` no navegador.
+## Como executar a API local
 
-Também é possível utilizar a extensão Live Server no VS Code.
+```bash
+cd backend
+pip install -r requirements.txt
+python train_model.py
+uvicorn main:app --reload
+```
+
+Endpoints:
+
+* `GET /`
+* `GET /health`
+* `POST /predict`
+
+## Como atualizar o modelo usado no frontend
+
+```bash
+cd backend
+pip install -r requirements.txt
+python export_static_model.py
+```
+
+Esse comando atualiza os arquivos `model.js` e `model-metrics.json` na raiz do projeto.
 
 ## Como publicar na Vercel
 
-1. Faça o upload deste repositório para o GitHub.
-2. Acesse a Vercel.
-3. Clique em `Add New Project`.
-4. Importe o repositório.
-5. Mantenha as configurações padrão para site estático.
-6. Clique em `Deploy`.
-
-Não é necessário configurar backend, API, banco de dados, comando de build ou variáveis de ambiente.
+1. Importe este repositório na Vercel.
+2. Use as configurações padrão para site estático.
+3. Não é necessário configurar backend, banco de dados, comando de build ou variáveis de ambiente.
 
 ## Observação
 
