@@ -197,6 +197,19 @@
           <h2>GPA previsto</h2>
           <div class="gpa-value" id="gpa-value">--</div>
           <p class="interpretation" id="interpretation">Preencha o formulário para visualizar a estimativa.</p>
+          <div class="result-explanation" id="result-explanation" hidden>
+            <p class="explanation-summary" id="explanation-summary"></p>
+            <div class="explanation-columns">
+              <div>
+                <h3>Fatores favoráveis</h3>
+                <ul id="positive-factors"></ul>
+              </div>
+              <div>
+                <h3>Pontos de atenção</h3>
+                <ul id="attention-factors"></ul>
+              </div>
+            </div>
+          </div>
           <div class="confidence-strip">
             <span>Modelo</span>
             <strong>Random Forest exportado</strong>

@@ -51,7 +51,17 @@ Para permitir a publicação como site estático na Vercel, sem backend e sem AP
 1. O usuário preenche o formulário com os dados do estudante.
 2. O JavaScript transforma as entradas categóricas no mesmo formato utilizado durante o treinamento.
 3. O arquivo `model.js` executa as árvores do Random Forest exportado.
-4. O sistema exibe o GPA previsto e uma interpretação simples do resultado.
+4. O sistema exibe o GPA previsto, uma interpretação simples do resultado e legendas explicativas.
+
+## Explicação dos resultados
+
+Além do valor previsto, a interface apresenta uma leitura textual do resultado com:
+
+* comparação entre o GPA anterior e o GPA previsto;
+* fatores favoráveis ao desempenho;
+* pontos de atenção associados ao perfil informado.
+
+Essas legendas são geradas no próprio frontend a partir dos dados inseridos pelo usuário e ajudam a tornar o resultado mais compreensível para fins acadêmicos e de apresentação.
 
 ## Tecnologias utilizadas
 
