@@ -2,7 +2,7 @@
 
 Aplicação web para demonstração de um projeto de Data Science voltado à predição de desempenho acadêmico de estudantes.
 
-O projeto contém frontend, backend, dados utilizados, scripts de treinamento e arquivos de configuração necessários para execução local.
+O projeto contém frontend, backend, dados utilizados, script de treinamento e arquivos de configuração necessários para execução local.
 
 ## Visão geral
 
@@ -23,15 +23,12 @@ Nesta versão, o frontend envia os dados do formulário para o backend FastAPI. 
 |   |   `-- .gitkeep
 |   |-- main.py
 |   |-- train_model.py
-|   |-- export_static_model.py
 |   |-- requirements.txt
 |   |-- runtime.txt
 |   `-- README.md
 |-- index.html
 |-- style.css
 |-- script.js
-|-- model.js
-|-- model-metrics.json
 |-- .gitignore
 `-- README.md
 ```
@@ -40,7 +37,7 @@ Nesta versão, o frontend envia os dados do formulário para o backend FastAPI. 
 
 * Frontend: `index.html`, `style.css`, `script.js` e `assets/`.
 * Backend: API FastAPI em `backend/main.py`.
-* Treinamento do modelo completo: `backend/train_model.py`.
+* Treinamento do modelo: `backend/train_model.py`.
 * Dados utilizados: `backend/data/ai_student_impact_dataset.csv`.
 * Modelos treinados locais: `backend/models/random_forest_model.joblib` e `backend/models/model_columns.joblib`.
 
@@ -125,7 +122,3 @@ Post_Semester_GPA
 ```
 
 As demais variáveis da base são usadas como entradas do modelo.
-
-## Observação
-
-O arquivo `model.js` permanece no repositório como versão exportada do modelo para execução estática, mas a demonstração principal com backend usa o endpoint `POST /predict` do FastAPI.

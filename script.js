@@ -1,6 +1,5 @@
-const API_URL = window.location.protocol === "file:"
-  ? "http://127.0.0.1:8000/predict"
-  : "/predict";
+const isBackendOrigin = ["127.0.0.1:8000", "localhost:8000"].includes(window.location.host);
+const API_URL = isBackendOrigin ? "/predict" : "http://127.0.0.1:8000/predict";
 
 const form = document.querySelector("#prediction-form");
 const gpaValue = document.querySelector("#gpa-value");
@@ -174,7 +173,11 @@ form.addEventListener("submit", async (event) => {
 
     if (!response.ok) {
       const error = await response.json().catch(() => ({}));
-      throw new Error(error.detail || "Não foi possível gerar a predição.");
+      const detail = Array.isArray(error.detail)
+        ? error.detail.map((item) => item.msg).join(" ")
+        : error.detail;
+
+      throw new Error(detail || `Erro ${response.status} ao chamar o backend.`);
     }
 
     const result = await response.json();
@@ -188,7 +191,7 @@ form.addEventListener("submit", async (event) => {
     gpaValue.textContent = "--";
     interpretation.textContent = "Não foi possível gerar a predição.";
     resultExplanation.hidden = true;
-    statusMessage.textContent = error.message;
+    statusMessage.textContent = `${error.message} Abra o sistema por http://127.0.0.1:8000/ com o backend rodando.`;
     statusMessage.classList.add("error");
   }
 });

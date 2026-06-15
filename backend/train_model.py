@@ -39,7 +39,6 @@ def train() -> None:
     y = df[TARGET_COLUMN]
     X = df.drop(columns=[TARGET_COLUMN])
 
-    # Mesma lógica usada no notebook: One-Hot Encoding com drop_first=True.
     X_encoded = pd.get_dummies(X, drop_first=True)
 
     X_train, X_test, y_train, y_test = train_test_split(
