@@ -5,10 +5,12 @@ import joblib
 import pandas as pd
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 
 BASE_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = BASE_DIR.parent
 MODEL_PATH = BASE_DIR / "models" / "random_forest_model.joblib"
 COLUMNS_PATH = BASE_DIR / "models" / "model_columns.joblib"
 
@@ -66,8 +68,8 @@ def load_model() -> None:
         model_columns = joblib.load(COLUMNS_PATH)
 
 
-@app.get("/")
-def root() -> dict:
+@app.get("/api")
+def api_info() -> dict:
     return {"message": "API de Predição de GPA em funcionamento"}
 
 
@@ -76,6 +78,8 @@ def health() -> dict:
     return {
         "status": "ok",
         "model_loaded": model is not None,
+        "model_path": str(MODEL_PATH),
+        "columns_path": str(COLUMNS_PATH),
     }
 
 
@@ -95,3 +99,6 @@ def predict(data: StudentData) -> dict:
     prediction = max(0.0, min(4.0, prediction))
 
     return {"predicted_gpa": round(prediction, 2)}
+
+
+app.mount("/", StaticFiles(directory=PROJECT_DIR, html=True), name="frontend")

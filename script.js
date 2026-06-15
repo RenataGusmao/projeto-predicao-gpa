@@ -1,3 +1,7 @@
+const API_URL = window.location.protocol === "file:"
+  ? "http://127.0.0.1:8000/predict"
+  : "/predict";
+
 const form = document.querySelector("#prediction-form");
 const gpaValue = document.querySelector("#gpa-value");
 const interpretation = document.querySelector("#interpretation");
@@ -22,19 +26,6 @@ const integerFields = new Set([
   "Perceived_AI_Dependency",
   "Anxiety_Level_During_Exams",
 ]);
-
-const categoricalFields = [
-  "Major_Category",
-  "Year_of_Study",
-  "Primary_Use_Case",
-  "Prompt_Engineering_Skill",
-  "Institutional_Policy",
-  "Burnout_Risk_Level",
-];
-
-function clamp(value, min, max) {
-  return Math.min(Math.max(value, min), max);
-}
 
 function getInterpretation(gpa) {
   if (gpa >= 3.5) {
@@ -165,68 +156,34 @@ function buildPayload(formData) {
   return payload;
 }
 
-function encodeInput(input, columns) {
-  return columns.map((column) => {
-    if (numericFields.has(column)) {
-      return input[column] ?? 0;
-    }
-
-    if (typeof input[column] === "boolean") {
-      return input[column] ? 1 : 0;
-    }
-
-    for (const field of categoricalFields) {
-      const prefix = `${field}_`;
-
-      if (column.startsWith(prefix)) {
-        const expectedValue = column.slice(prefix.length);
-        return String(input[field]) === expectedValue ? 1 : 0;
-      }
-    }
-
-    return 0;
-  });
-}
-
-function predictTree(tree, values) {
-  let node = 0;
-
-  while (tree.childrenLeft[node] !== -1) {
-    const featureIndex = tree.feature[node];
-    const threshold = tree.threshold[node];
-    node = values[featureIndex] <= threshold
-      ? tree.childrenLeft[node]
-      : tree.childrenRight[node];
-  }
-
-  return tree.value[node];
-}
-
-function predictGpa(input) {
-  const model = window.EDUPREDICT_MODEL;
-
-  if (!model) {
-    throw new Error("Modelo treinado não foi carregado.");
-  }
-
-  const values = encodeInput(input, model.columns);
-  const total = model.trees.reduce((sum, tree) => sum + predictTree(tree, values), 0);
-
-  return clamp(total / model.trees.length, 0, 4);
-}
-
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
+  const payload = buildPayload(new FormData(form));
+  statusMessage.textContent = "Enviando dados para o backend...";
+  statusMessage.classList.remove("error");
+
   try {
-    const payload = buildPayload(new FormData(form));
-    const predictedGpa = predictGpa(payload);
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(error.detail || "Não foi possível gerar a predição.");
+    }
+
+    const result = await response.json();
+    const predictedGpa = Number(result.predicted_gpa);
 
     gpaValue.textContent = predictedGpa.toFixed(2);
     interpretation.textContent = getInterpretation(predictedGpa);
     updateExplanation(payload, predictedGpa);
-    statusMessage.textContent = "Predição gerada com o modelo treinado exportado para o navegador.";
-    statusMessage.classList.remove("error");
+    statusMessage.textContent = "Predição gerada pelo backend FastAPI.";
   } catch (error) {
     gpaValue.textContent = "--";
     interpretation.textContent = "Não foi possível gerar a predição.";
